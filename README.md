@@ -9,13 +9,21 @@ Inputs:
 Sudoku puzzle is inputed as a .txt file named "theGrid.txt". The file contains the Sudoku puzzle to be solved, with each grid space delineated by a " ", and each blank denoted by "x". An example of the format is as follows:
 
 8 x x x x x x x x
+
 x x 3 6 x x x x x
+
 x 7 x x 9 x 2 x x
+
 x 5 x x x 7 x x x
+
 x x x x 4 5 7 x x
+
 x x x 1 x x x 3 x
+
 x x 1 x x x x 6 8
+
 x x 8 5 x x x 1 x
+
 x 9 x x x x 4 x x
 
 
