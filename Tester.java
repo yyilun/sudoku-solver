@@ -2,6 +2,8 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.HashSet;
 
+// method to test the program
+// takes the input text file, invokes the solver function, and outputs the results
 public class Tester {
 	
 	
@@ -14,6 +16,7 @@ public class Tester {
 		SudokuSolver solveIt = new SudokuSolver();
 
 
+		// parses the input text file
 		try {
 			File inFile = new File(fileName);
 			Scanner input = new Scanner(inFile);
@@ -31,7 +34,10 @@ public class Tester {
 		}
 
 
+		// invokes the solver function
 		solveIt.solve();
+		
+		//outputs the results
 		for (int j = 0; j < 9; j++) {
 		for (int k = 0; k < 9; k++) {
 			solveIt.printElement(j,k);
