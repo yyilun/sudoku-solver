@@ -38,13 +38,15 @@ The program will print the solved Sudoku puzzle directly into terminal.
 
 ## Program files:
 Tester - the test driver, reads the input file, parses the input, and outputs the solved solution
+
 SudokuSolver - contains the methods for solving the Sudoku puzzle
+
 SudokuBox - the object that contains current values and possible values for each grid box
 
 ## Program description:
-The Sudoku solver will initialize a 9x9 array of SudokuBox objects when the program begins. Each SudokuBox object contains the current value (0-9, or x), and a queue of possible values if it is currently undefined.
+This program implements the depth first backtracking algorithm. 
 
-The program will then analyze each grid, and remove possible values of each undefined grid based on the restrictions imposed by the other grids. For example, if a row already contains 1,2,3,4,6,7,8,9, then it will remove these values from the remaining undefined grid. It also keeps track of the grid with the least number of possible values.
+The program will analyze each grid, and remove possible values of each undefined grid based on the restrictions imposed by the other grids. For example, if a row already contains 1,2,3,4,6,7,8,9, then it will remove these values from the remaining undefined grid. It also keeps track of the grid with the least number of possible values.
 
 If there are grids with only one remaining possible value, that value will be locked into the puzzle. Then the update process gets repeated again.
 
