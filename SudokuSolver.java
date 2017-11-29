@@ -1,6 +1,4 @@
-
 import java.util.Stack;
-
 
 public class SudokuSolver {
 	
@@ -11,7 +9,7 @@ public class SudokuSolver {
 	int remainingGrids;
 	int runCount;
 	
-	
+	//instantiates a grid of 9x9 SudokuBox objects
 	public SudokuSolver(){
 		sudokuGrid = new SudokuBox[9][9];
 		lowestCount = 10;
@@ -22,12 +20,14 @@ public class SudokuSolver {
 
 	}
 	
+	//fills each grid with a number
 	public void addElement(int x, int y, String value){
 		Integer currentValue;
 		currentValue = checkValue(value);
 		sudokuGrid[x][y] = new SudokuBox(currentValue);
 	}
 	
+	//check if there is a value inputed by the user for a grid, return null if the grid is empty
 	private static Integer checkValue(String n) {
 		if (n.equals("x")) {
 			return null;
@@ -35,28 +35,37 @@ public class SudokuSolver {
 			return Integer.parseInt(n);
 	}
 	
+	//prints the value of each grid box
 	public void printElement(int x, int y){
 		System.out.print(sudokuGrid[x][y].value+" ");
 	}
 	
+	//function to invoke to solve the puzzle
 	public void solve(){
 		
+		// loop until all the grids are solved
 		do{
-			//System.out.println(runCount++);
 			lowestCount = 10;
+			// check if there is a need to backtrack
 			boolean noUndo = updateBoard();
+			
+			//if there is a need to backtrack, then undo the last heuristic guess
 			if(!noUndo){
-				undoLast();				
+				undoLast();
+				
+			//if there is no need to backtrack, continue with the heuristic
 			} else {
-					heuristics();
+				heuristics();
 			}
 		} while(remainingGrids>1);
 		} 
 
+	// set the grid with the lowest possible numbers of numbers to be filled in
 	private void heuristics(){
 		setElementOnce(currentLowest);
 	}
 	
+	// method to backtrack the previous heuristic
 	private void undoLast(){
 		boolean onOff = true;
 		while(onOff){
@@ -70,6 +79,8 @@ public class SudokuSolver {
 		}
 	}
 	
+	// check if there are any grids that does not have any possible values
+	// if there are boxes with no possible values, then the program has to backtrack
 	private boolean updateBoard(){
 		remainingGrids = 0;
 
@@ -84,11 +95,13 @@ public class SudokuSolver {
 		return trueFalse;
 	}
 	
+	// set a possible value from the list of possible values of a grid
 	private void setElementOnce(SudokuBox prevElement){
 		prevElement.value = prevElement.possibleValues.poll();
 		sequence.push(prevElement);
 	}
 
+	// evaluate the possible values for each unfilled grid given the restrictions imposed by other neighboring grids
 	private boolean evaluatePossible(int i, int j) {
 		if (sudokuGrid[i][j].value == null) {
 			remainingGrids++;
